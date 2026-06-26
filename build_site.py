@@ -754,11 +754,12 @@ def render_tablestatus():
     body = page_hero("TABLE STATUS", "現在の稼働状況", "現在のテーブルの稼働状況をご覧いただけます。") + """  <section class="page-body">
     <div class="container">
       <div class="block">
-        <div class="block-head"><h2>テーブル稼働状況</h2></div>
-        <div class="status-box">
-          <p class="big">YORIMICHIの現在のテーブルの稼働状況をご覧いただけます。<br>おひとり様でもすぐにご案内可能です。</p>
-          <p class="note" style="margin-top:14px">※混雑時は更新が遅れる場合もございます。</p>
+        <div class="block-head"><h2>テーブル稼働状況</h2>
+          <p class="sub">YORIMICHIの現在のテーブル稼働状況です。おひとり様でもすぐにご案内可能です。</p></div>
+        <div class="sheet-embed">
+          <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1wb88DDCPYZLFrB0IAoL8cYuu6Ew2qjX2mYbNb7M0QDnpOWDf-DUxpH36mri1FHYe1L5lxriN4FUw/pubhtml?widget=true&amp;headers=false" loading="lazy" title="YORIMICHI 稼働状況"></iframe>
         </div>
+        <p class="note" style="margin-top:14px">※混雑時は更新が遅れる場合もございます。</p>
         <p style="margin-top:24px;text-align:center">皆様のご来場 お待ちしております！<br>少人数時はたくさんハンドをプレイできてオススメです！</p>
         <div style="margin-top:18px;text-align:center"><a href="%LINE%" class="btn btn-line" target="_blank" rel="noopener">LINEで確認・お問い合わせ <span class="arrow">›</span></a></div>
       </div>
