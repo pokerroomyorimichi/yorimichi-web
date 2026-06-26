@@ -453,3 +453,46 @@ a { color: inherit; text-decoration: none; }
 @media(max-width:560px){ .struct th,.struct td{ padding:7px 4px; font-size:11.5px; } }
 .struct tr.span td{ background:var(--ink); color:#fff; font-weight:700; font-size:12px; letter-spacing:.04em; }
 .struct tbody tr.span:nth-child(odd){ background:var(--ink); }
+
+/* ===========================================================
+   レスポンシブ仕上げ調整（PC / モバイル両対応の磨き込み）
+   =========================================================== */
+/* PC：下部右の固定CTAがフッター内容に重ならないよう余白を確保 */
+@media (min-width: 601px){
+  .footer{ padding-bottom: 96px; }
+}
+/* タブレット中間幅 */
+@media (min-width: 601px) and (max-width: 900px){
+  .quickbar .v{ font-size: 13px; }
+  .step-grid{ gap: 16px; }
+}
+/* モバイル仕上げ */
+@media (max-width: 600px){
+  .header{ padding: 8px 18px; }
+  .header .logo img{ height: 40px; }
+  .hero{ min-height: 90vh; }
+  .hero .container{ padding-top: 84px; padding-bottom: 92px; }
+  .hero .desc{ font-size: 13.5px; line-height: 1.95; }
+  .scroll-hint{ display: none; }            /* 下部固定バーとの重なり回避 */
+  body{ padding-bottom: 60px; }             /* 下部固定バー分の余白 */
+  .floatbar .fb{ font-size: 11.5px; gap: 5px; white-space: nowrap; padding: 12px 4px; }
+  .quickbar a, .quickbar div{ padding: 13px 6px; }
+  .quickbar .k{ font-size: 9px; letter-spacing: .12em; }
+  .quickbar .v{ font-size: 11.5px; }
+  .section{ padding: 54px 0; }
+  .section-head{ margin-bottom: 32px; }
+  .page-hero{ padding: 116px 0 42px; }
+  .page-body{ padding: 46px 0 70px; }
+  .page-body .container{ padding: 0 18px; }
+  .block{ margin-bottom: 40px; }
+  .access-info .btn{ width: 100%; justify-content: center; }
+  .footer nav{ grid-template-columns: 1fr 1fr; gap: 10px 20px; }
+  .acc>summary{ font-size: 14px; padding: 14px 16px; }
+  .scard .top{ flex-wrap: wrap; gap: 6px; }
+}
+/* 極小幅（〜380px）でのテーブル/チップのはみ出し防止 */
+@media (max-width: 380px){
+  .struct th, .struct td{ font-size: 10.5px; padding: 6px 3px; }
+  .levels span{ font-size: 11px; padding: 6px 10px; }
+  .quickbar .v{ font-size: 10.5px; }
+}
