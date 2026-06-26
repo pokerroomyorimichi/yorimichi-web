@@ -180,8 +180,19 @@ def crumbs(items):
         for t, u in items)
     return f'  <nav class="breadcrumb"><ol>{lis}</ol></nav>\n'
 
+def relativize(content, out):
+    """ルート絶対パス(/...)を、そのページからの相対パスに変換。
+    これでGitHubのサブパスでも独自ドメイン直下でも同じビルドが動く。"""
+    depth = out.count("/")               # index.html=0 / x/index.html=1 / a/b/index.html=2
+    prefix = "../" * depth if depth else "./"
+    content = re.sub(r'(href|src)="/([^"]*)"', lambda m: f'{m.group(1)}="{prefix}{m.group(2)}"', content)
+    content = re.sub(r"url\('/([^']*)'\)", lambda m: f"url('{prefix}{m.group(1)}')", content)
+    content = re.sub(r'(content)="/(assets[^"]*)"', lambda m: f'{m.group(1)}="{prefix}{m.group(2)}"', content)
+    return content
+
 def write(path, content):
     out = "index.html" if path == "/" else path.lstrip("/") + "/index.html"
+    content = relativize(content, out)
     full = os.path.join(ROOT, out)
     os.makedirs(os.path.dirname(full), exist_ok=True) if os.path.dirname(out) else None
     open(full, "w", encoding="utf-8").write(content)
