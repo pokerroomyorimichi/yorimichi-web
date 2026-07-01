@@ -21,7 +21,7 @@
   --sans:'Noto Sans JP',sans-serif;
   --en:'Cormorant',serif;
   --maxw:1180px;
-  --logo-h:52px;          /* ロゴの高さ（調整パネル対象／大画面で96px） */
+  --logo-h:42px;          /* ロゴの高さ（調整パネル対象・テキストロゴ） */
   --fs:16px;              /* 本文サイズ（大画面で19px） */
   --sec-pad:80px;         /* セクション上下余白 */
   --ease:cubic-bezier(.16,.84,.44,1);
@@ -241,7 +241,7 @@ section{padding:var(--sec-pad) 0;position:relative;}
 
 /* ---- 大画面アップスケール（ワイドモニター対応） ---- */
 @media(min-width:1500px){
-  :root{--maxw:1500px;--fs:19px;--logo-h:96px;--sec-pad:80px;}
+  :root{--maxw:1500px;--fs:19px;--logo-h:64px;--sec-pad:80px;}
   .hd{padding:18px 40px;}
   .hd.solid{padding:12px 40px;}
   .hd .nav{gap:32px;}
@@ -296,7 +296,7 @@ section{padding:var(--sec-pad) 0;position:relative;}
   .board-grid{grid-template-columns:1fr;}
 }
 @media(max-width:680px){
-  :root{--logo-h:44px;--fs:16px;}
+  :root{--logo-h:34px;--fs:16px;}
   .hd .nav{display:none;}.hd .burger{display:flex;}
   .fixedcta{display:block;}
   .ft{padding-bottom:120px;}
@@ -310,7 +310,7 @@ section{padding:var(--sec-pad) 0;position:relative;}
 <div class="proto-note">PROTOTYPE ｜ 夜の喫茶店案（本番未反映）</div>
 
 <header class="hd" id="hd">
-  <a href="#" class="logo"><img src="../../assets/img/logo_color_trim.png" alt="POKER ROOM YORIMICHI"></a>
+  <a href="#" class="logo"><img src="../../assets/img/logo_home_ink.png" alt="POKER ROOM YORIMICHI"></a>
   <nav class="nav">
     <a href="#assure">はじめての方</a>
     <a href="#today">本日の予定</a>
