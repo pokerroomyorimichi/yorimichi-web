@@ -59,8 +59,8 @@ body::before{
   padding:14px 26px;transition:padding .4s,box-shadow .4s,background .4s;
   background:linear-gradient(180deg,rgba(243,238,229,.96) 0%,rgba(243,238,229,.72) 52%,rgba(243,238,229,0) 100%);}
 .hd.solid{background:rgba(243,238,229,.96);backdrop-filter:blur(8px);box-shadow:0 1px 0 var(--line);padding:9px 26px;}
-.hd .logo img{height:54px;display:block;transition:height .4s;}
-.hd.solid .logo img{height:48px;}
+.hd .logo img{height:46px;display:block;transition:height .4s;}
+.hd.solid .logo img{height:42px;}
 .hd .nav{display:flex;gap:24px;align-items:center;}
 .hd .nav a{font-size:13px;font-weight:500;letter-spacing:.1em;color:var(--ink);transition:color .2s;}
 .hd .nav a:hover{color:var(--accent);}
@@ -187,8 +187,12 @@ section{padding:96px 0;position:relative;}
 .access h3{font-family:var(--serif);font-weight:600;font-size:22px;margin-bottom:16px;}
 .access .addr{font-size:14px;line-height:2.1;color:#4a4644;}
 .access .addr .pc{font-family:var(--en);color:var(--ink-soft);}
-.access .map{aspect-ratio:4/3;border:1px solid var(--line);overflow:hidden;}
-.access .map iframe{width:100%;height:100%;border:0;filter:grayscale(.2) sepia(.1);}
+.access .map{position:relative;display:block;aspect-ratio:4/3;border:1px solid var(--line);overflow:hidden;}
+.access .map iframe{width:100%;height:100%;border:0;filter:grayscale(.2) sepia(.1);pointer-events:none;}
+.access .map .map-open{position:absolute;right:12px;bottom:12px;background:#fff;color:var(--ink);font-size:12.5px;font-weight:700;
+  padding:9px 15px;border-radius:2px;box-shadow:0 6px 18px rgba(62,58,57,.22);display:inline-flex;align-items:center;gap:6px;transition:.25s;}
+.access .map:hover .map-open{background:var(--accent);color:#fff;}
+.access .map .map-open .ar{font-family:var(--en);font-size:16px;}
 
 /* ---- フッター ---- */
 .ft{background:var(--ink);color:#cfc8c0;padding:60px 0 110px;}
@@ -215,7 +219,7 @@ section{padding:96px 0;position:relative;}
   body{font-size:16px;}
   .hd{padding:18px 40px;}
   .hd.solid{padding:12px 40px;}
-  .hd .logo img{height:62px;}
+  .hd .logo img{height:60px;}
   .hd.solid .logo img{height:54px;}
   .hd .nav{gap:32px;}
   .hd .nav a{font-size:15px;}
@@ -284,7 +288,7 @@ section{padding:96px 0;position:relative;}
 <div class="proto-note">PROTOTYPE ｜ 夜の喫茶店案（本番未反映）</div>
 
 <header class="hd" id="hd">
-  <a href="#" class="logo"><img src="../../assets/img/logo_color.png" alt="YORIMICHI"></a>
+  <a href="#" class="logo"><img src="../../assets/img/logo_color_trim.png" alt="POKER ROOM YORIMICHI"></a>
   <nav class="nav">
     <a href="#assure">はじめての方</a>
     <a href="#today">本日の予定</a>
@@ -476,9 +480,10 @@ section{padding:96px 0;position:relative;}
           <a href="tel:0507112879" class="btn btn-ghost">📞 050-7112-1879</a>
         </div>
       </div>
-      <div class="map">
+      <a class="map" href="https://maps.app.goo.gl/FkfWMMowDnwsSPwv5" target="_blank" rel="noopener" aria-label="Google Mapで開く">
         <iframe src="https://maps.google.com/maps?q=静岡県沼津市添地町72&output=embed" loading="lazy" title="YORIMICHI 地図"></iframe>
-      </div>
+        <span class="map-open">📍 Google Mapで開く <span class="ar">›</span></span>
+      </a>
     </div>
   </div>
 </section>
