@@ -21,13 +21,16 @@
   --sans:'Noto Sans JP',sans-serif;
   --en:'Cormorant',serif;
   --maxw:1180px;
+  --logo-h:46px;          /* ロゴの高さ（調整パネル対象） */
+  --fs:15px;              /* 本文サイズ */
+  --sec-pad:96px;         /* セクション上下余白 */
   --ease:cubic-bezier(.16,.84,.44,1);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
   font-family:var(--sans); color:var(--ink); background:var(--paper);
-  line-height:1.95; font-size:15px; letter-spacing:.04em; -webkit-font-smoothing:antialiased;
+  line-height:1.95; font-size:var(--fs); letter-spacing:.04em; -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
 img{max-width:100%;display:block;}
@@ -59,8 +62,8 @@ body::before{
   padding:14px 26px;transition:padding .4s,box-shadow .4s,background .4s;
   background:linear-gradient(180deg,rgba(243,238,229,.96) 0%,rgba(243,238,229,.72) 52%,rgba(243,238,229,0) 100%);}
 .hd.solid{background:rgba(243,238,229,.96);backdrop-filter:blur(8px);box-shadow:0 1px 0 var(--line);padding:9px 26px;}
-.hd .logo img{height:46px;display:block;transition:height .4s;}
-.hd.solid .logo img{height:42px;}
+.hd .logo img{height:var(--logo-h);display:block;transition:height .4s;}
+.hd.solid .logo img{height:calc(var(--logo-h) - 4px);}
 .hd .nav{display:flex;gap:24px;align-items:center;}
 .hd .nav a{font-size:13px;font-weight:500;letter-spacing:.1em;color:var(--ink);transition:color .2s;}
 .hd .nav a:hover{color:var(--accent);}
@@ -111,7 +114,7 @@ body::before{
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(57,211,83,.55)}70%{box-shadow:0 0 0 8px rgba(57,211,83,0)}100%{box-shadow:0 0 0 0 rgba(57,211,83,0)}}
 
 /* ---- セクション共通 ---- */
-section{padding:96px 0;position:relative;}
+section{padding:var(--sec-pad) 0;position:relative;}
 .eyebrow{font-family:var(--en);font-size:13px;letter-spacing:.28em;color:var(--accent);margin-bottom:14px;display:block;}
 .sec-h{font-family:var(--serif);font-weight:600;font-size:clamp(24px,4vw,34px);line-height:1.5;letter-spacing:.05em;}
 
@@ -213,18 +216,37 @@ section{padding:96px 0;position:relative;}
   padding:5px 12px;letter-spacing:.06em;border-radius:2px;backdrop-filter:blur(4px);}
 @media(max-width:680px){.proto-note{bottom:60px;left:10px;font-size:10px;padding:4px 9px;}}
 
+/* ---- 調整パネル（開発用・本番では非表示） ---- */
+.adj-toggle{position:fixed;top:78px;right:16px;z-index:95;background:var(--ink);color:#fff;border:none;cursor:pointer;
+  width:44px;height:44px;border-radius:50%;font-size:19px;box-shadow:0 6px 18px rgba(62,58,57,.32);transition:.2s;}
+.adj-toggle:hover{background:var(--accent);}
+.adj{position:fixed;top:130px;right:16px;z-index:95;width:290px;max-width:calc(100vw - 32px);background:#fff;border:1px solid var(--line);
+  border-radius:6px;box-shadow:0 22px 54px rgba(62,58,57,.3);padding:16px 18px;font-family:var(--sans);
+  display:none;max-height:78vh;overflow-y:auto;}
+.adj.open{display:block;}
+.adj h5{font-size:13px;font-weight:700;margin-bottom:3px;color:var(--ink);letter-spacing:.04em;}
+.adj .hint{font-size:10.5px;color:var(--ink-soft);line-height:1.6;margin-bottom:14px;}
+.adj .row{margin-bottom:13px;}
+.adj .row label{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:5px;color:var(--ink);}
+.adj .row label .v{color:var(--accent);font-family:var(--en);font-size:14px;}
+.adj input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer;}
+.adj .clabel{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.adj .colors{display:flex;gap:10px;margin-bottom:14px;}
+.adj .colors .c{flex:1;text-align:center;font-size:10.5px;color:var(--ink-soft);}
+.adj .colors input[type=color]{width:100%;height:34px;border:1px solid var(--line);border-radius:4px;cursor:pointer;background:none;margin-top:4px;}
+.adj .acts{display:flex;gap:8px;}
+.adj .acts button{flex:1;padding:10px;font-size:11.5px;font-weight:700;border-radius:4px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink);}
+.adj .acts .cp{background:var(--accent);color:#fff;border:none;}
+.adj .out{margin-top:10px;font-size:10.5px;color:var(--ink);background:var(--paper);padding:9px 10px;border-radius:4px;white-space:pre-wrap;display:none;font-family:monospace;line-height:1.6;}
+
 /* ---- 大画面アップスケール（ワイドモニター対応） ---- */
 @media(min-width:1500px){
-  :root{--maxw:1340px;}
-  body{font-size:16px;}
+  :root{--maxw:1340px;--fs:16px;--logo-h:60px;--sec-pad:130px;}
   .hd{padding:18px 40px;}
   .hd.solid{padding:12px 40px;}
-  .hd .logo img{height:60px;}
-  .hd.solid .logo img{height:54px;}
   .hd .nav{gap:32px;}
   .hd .nav a{font-size:15px;}
   .wrap{padding:0 40px;}
-  section{padding:130px 0;}
   .hero .inner{padding-bottom:96px;}
   .hero .tag{font-size:17px;margin-bottom:18px;}
   .hero h1{font-size:82px;margin-bottom:24px;}
@@ -513,6 +535,28 @@ section{padding:96px 0;position:relative;}
 
 <div class="fixedcta"><a href="https://lin.ee/vNUBKse" target="_blank" rel="noopener">💬 LINEでデビュー予約・相談する</a></div>
 
+<!-- 調整パネル（開発用） -->
+<button class="adj-toggle" id="adjToggle" title="サイズ・色を調整">⚙</button>
+<div class="adj" id="adj">
+  <h5>調整パネル</h5>
+  <p class="hint">スライダーや色を動かすと、その場で見た目が変わります。気に入ったら「設定をコピー」を押して、その内容を私に貼ってください。恒久反映します。</p>
+  <div class="row"><label>ロゴの大きさ <span class="v" id="v-logo">46px</span></label><input type="range" id="s-logo" min="30" max="96" value="46"></div>
+  <div class="row"><label>コンテンツ幅 <span class="v" id="v-maxw">1180px</span></label><input type="range" id="s-maxw" min="1000" max="1500" step="10" value="1180"></div>
+  <div class="row"><label>本文サイズ <span class="v" id="v-fs">15px</span></label><input type="range" id="s-fs" min="13" max="19" step="0.5" value="15"></div>
+  <div class="row"><label>セクション余白 <span class="v" id="v-pad">96px</span></label><input type="range" id="s-pad" min="48" max="170" step="2" value="96"></div>
+  <div class="clabel">ブランドカラー</div>
+  <div class="colors">
+    <div class="c">朱<input type="color" id="c-accent" value="#E63B10"></div>
+    <div class="c">墨<input type="color" id="c-ink" value="#3E3A39"></div>
+    <div class="c">生成<input type="color" id="c-paper" value="#F3EEE5"></div>
+  </div>
+  <div class="acts">
+    <button class="cp" id="adjCopy">設定をコピー</button>
+    <button id="adjReset">リセット</button>
+  </div>
+  <div class="out" id="adjOut"></div>
+</div>
+
 <script>
   const hd=document.getElementById('hd');
   const onS=()=>hd.classList.toggle('solid',scrollY>60);
@@ -520,6 +564,30 @@ section{padding:96px 0;position:relative;}
   document.querySelector('.burger').addEventListener('click',()=>{
     location.href='https://lin.ee/vNUBKse';
   });
+
+  // ---- 調整パネル ----
+  (function(){
+    const R=document.documentElement.style, $=id=>document.getElementById(id);
+    const bind=(sid,varName,unit,vid)=>{const s=$(sid),v=$(vid);
+      s.addEventListener('input',()=>{R.setProperty(varName,s.value+unit);v.textContent=s.value+unit;});};
+    bind('s-logo','--logo-h','px','v-logo');
+    bind('s-maxw','--maxw','px','v-maxw');
+    bind('s-fs','--fs','px','v-fs');
+    bind('s-pad','--sec-pad','px','v-pad');
+    const bc=(cid,varName)=>{const c=$(cid);c.addEventListener('input',()=>R.setProperty(varName,c.value));};
+    bc('c-accent','--accent');bc('c-ink','--ink');bc('c-paper','--paper');
+    $('adjToggle').addEventListener('click',()=>$('adj').classList.toggle('open'));
+    $('adjReset').addEventListener('click',()=>{
+      ['--logo-h','--maxw','--fs','--sec-pad','--accent','--ink','--paper'].forEach(p=>R.removeProperty(p));
+      location.reload();
+    });
+    $('adjCopy').addEventListener('click',()=>{
+      const t=`【調整パネルの設定】\nロゴの大きさ: ${$('s-logo').value}px\nコンテンツ幅: ${$('s-maxw').value}px\n本文サイズ: ${$('s-fs').value}px\nセクション余白: ${$('s-pad').value}px\n朱色: ${$('c-accent').value}\n墨色: ${$('c-ink').value}\n生成り: ${$('c-paper').value}`;
+      const o=$('adjOut');o.style.display='block';o.textContent=t;
+      if(navigator.clipboard)navigator.clipboard.writeText(t);
+      $('adjCopy').textContent='コピーしました ✓';setTimeout(()=>$('adjCopy').textContent='設定をコピー',1600);
+    });
+  })();
 </script>
 </body>
 </html>
