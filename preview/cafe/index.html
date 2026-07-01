@@ -154,8 +154,8 @@ section{padding:var(--sec-pad) 0;position:relative;}
 /* ---- 店内ギャラリー（横スクロール） ---- */
 .gallery{background:var(--paper-2);overflow:hidden;}
 .gallery .head{margin-bottom:34px;}
-.scroller{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:18px;
-  padding-left:max(26px,calc((100vw - var(--maxw))/2 + 26px));}
+.gallery .wrap{overflow:visible;}
+.scroller{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:18px;padding-right:2px;}
 .scroller::-webkit-scrollbar{height:6px;}.scroller::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px;}
 .gcard{flex:0 0 auto;width:420px;scroll-snap-align:start;}
 .gcard .im{aspect-ratio:4/3;background-size:cover;background-position:center;
@@ -447,12 +447,12 @@ section{padding:var(--sec-pad) 0;position:relative;}
     <span class="eyebrow">ATMOSPHERE</span>
     <h2 class="sec-h">沼津の夜景と、いつもの席。</h2>
   </div>
-  <div class="scroller layer">
+  <div class="wrap layer"><div class="scroller">
     <div class="gcard"><div class="im" style="background-image:url('../../assets/img/table_cityview.webp')"></div><div class="cap"><b>窓際の席</b>沼津の街明かりを眺めながら</div></div>
     <div class="gcard"><div class="im" style="background-image:url('../../assets/img/hero_ingame.webp')"></div><div class="cap"><b>ゲーム中</b>本格的なライブポーカーを気軽に</div></div>
     <div class="gcard"><div class="im" style="background-image:url('../../assets/img/hero_room.webp')"></div><div class="cap"><b>店内</b>バーカウンター併設のくつろぎ空間</div></div>
     <div class="gcard"><div class="im" style="background-image:url('../../assets/img/access.webp')"></div><div class="cap"><b>アクセス</b>JR沼津駅南口より徒歩5分</div></div>
-  </div>
+  </div></div>
 </section>
 
 <!-- 安心の約束 -->
