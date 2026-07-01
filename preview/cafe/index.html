@@ -80,9 +80,31 @@ body::before{
   text-shadow:0 2px 30px rgba(40,36,33,.45);margin-bottom:18px;}
 .hero p{font-size:14px;line-height:2;max-width:480px;opacity:.95;margin-bottom:30px;text-shadow:0 1px 14px rgba(40,36,33,.5);}
 .hero .acts{display:flex;gap:14px;flex-wrap:wrap;}
+.hero-sub{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:12.5px;letter-spacing:.08em;
+  color:#fff;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:3px;transition:.25s;}
+.hero-sub:hover{border-color:var(--accent);color:#ffd9ce;}
+.hero-sub .ar{font-family:var(--en);}
 .scrollcue{position:absolute;right:30px;bottom:26px;z-index:2;color:#fff;font-family:var(--en);font-size:12px;letter-spacing:.25em;
   writing-mode:vertical-rl;display:flex;align-items:center;gap:10px;opacity:.9;}
 .scrollcue::after{content:"";width:1px;height:50px;background:rgba(255,255,255,.7);}
+
+/* ---- 本日のYORIMICHI（常連向けボード） ---- */
+.board{background:var(--ink);color:var(--paper);}
+.board .head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:30px;flex-wrap:wrap;}
+.board .eyebrow{color:#e8a48f;}
+.board .sec-h{color:var(--paper);}
+.board .head .date{font-family:var(--en);font-size:13.5px;letter-spacing:.12em;color:#c9c2bb;}
+.board-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);}
+.bcard{background:var(--ink);padding:26px 22px 24px;display:flex;flex-direction:column;gap:9px;transition:.25s;min-height:184px;}
+.bcard:hover{background:#34302f;}
+.bcard .lb{font-family:var(--en);font-size:12px;letter-spacing:.2em;color:#e8a48f;min-height:16px;}
+.bcard h4{font-family:var(--serif);font-weight:600;font-size:19px;line-height:1.45;}
+.bcard p{font-size:12.5px;color:#c9c2bb;line-height:1.85;flex:1;}
+.bcard .go{font-family:var(--en);font-size:13px;letter-spacing:.08em;color:var(--paper);display:flex;align-items:center;gap:6px;}
+.bcard .go .ar{color:#e8a48f;font-size:16px;}
+.live{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:11px;font-weight:700;color:#fff;letter-spacing:.1em;}
+.live .dot{width:8px;height:8px;border-radius:50%;background:#39d353;animation:pulse 1.8s infinite;}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(57,211,83,.55)}70%{box-shadow:0 0 0 8px rgba(57,211,83,0)}100%{box-shadow:0 0 0 0 rgba(57,211,83,0)}}
 
 /* ---- セクション共通 ---- */
 section{padding:96px 0;position:relative;}
@@ -183,12 +205,17 @@ section{padding:96px 0;position:relative;}
   padding:4px 12px;letter-spacing:.08em;opacity:.85;}
 
 @media(max-width:880px){
+  .board-grid{grid-template-columns:1fr 1fr;}
+  .board .head{align-items:flex-start;}
   .step-row{grid-template-columns:1fr;gap:34px;}
   .step:not(:last-child)::after{display:none;}
   .promise .grid{grid-template-columns:1fr;}
   .access .grid{grid-template-columns:1fr;gap:26px;}
   .room-links{grid-template-columns:1fr;}
   .ft .top{flex-direction:column;}
+}
+@media(max-width:480px){
+  .board-grid{grid-template-columns:1fr;}
 }
 @media(max-width:680px){
   .hd .nav{display:none;}.hd .burger{display:flex;}
@@ -207,9 +234,10 @@ section{padding:96px 0;position:relative;}
   <a href="#" class="logo"><img src="../../assets/img/logo_color.png" alt="YORIMICHI"></a>
   <nav class="nav">
     <a href="#assure">はじめての方</a>
-    <a href="#menu">デビュープラン</a>
-    <a href="#room">遊び方</a>
-    <a href="#access">アクセス</a>
+    <a href="#today">本日の予定</a>
+    <a href="#room">トーナメント</a>
+    <a href="../../monthlyschedule/">スケジュール</a>
+    <a href="../../tablestatus/">稼働状況</a>
     <a href="https://lin.ee/vNUBKse" target="_blank" rel="noopener" class="cta">LINEで予約</a>
   </nav>
   <button class="burger" aria-label="メニュー"><span></span><span></span><span></span></button>
@@ -227,9 +255,46 @@ section{padding:96px 0;position:relative;}
         <a href="https://lin.ee/vNUBKse" target="_blank" rel="noopener" class="btn btn-line">💬 LINEで予約・相談 <span class="ar">›</span></a>
         <a href="#assure" class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.7)">はじめての方へ</a>
       </div>
+      <a href="#today" class="hero-sub">常連の方へ ― 本日の予定・稼働状況を見る <span class="ar">↓</span></a>
     </div>
   </div>
   <div class="scrollcue">SCROLL</div>
+</section>
+
+<!-- 本日のYORIMICHI（常連向けボード） -->
+<section class="board" id="today">
+  <div class="wrap layer">
+    <div class="head">
+      <div><span class="eyebrow">TODAY'S YORIMICHI</span><h2 class="sec-h">本日のYORIMICHI</h2></div>
+      <div class="date">常連の方へ ／ いまの店内・今月の予定をひと目で</div>
+    </div>
+    <div class="board-grid">
+      <a class="bcard" href="../../tablestatus/">
+        <span class="lb"><span class="live"><span class="dot"></span>LIVE</span></span>
+        <h4>稼働状況</h4>
+        <p>いま空いてる？ テーブルの稼働をリアルタイムで確認。おひとりでもすぐご案内します。</p>
+        <span class="go">リアルタイムで見る <span class="ar">›</span></span>
+      </a>
+      <a class="bcard" href="../../tounament-events/">
+        <span class="lb">TOURNAMENT</span>
+        <h4>トーナメント<br>イベント</h4>
+        <p>今週・今月の特別トーナメント。卒業戦・記念イベント・月例ランキング戦の日程。</p>
+        <span class="go">日程を見る <span class="ar">›</span></span>
+      </a>
+      <a class="bcard" href="../../monthlyschedule/">
+        <span class="lb">SCHEDULE</span>
+        <h4>マンスリー<br>スケジュール</h4>
+        <p>今月のイベント・営業カレンダー。リングもトーナメントも一目で分かります。</p>
+        <span class="go">カレンダーを見る <span class="ar">›</span></span>
+      </a>
+      <a class="bcard" href="../../monthlyranking/">
+        <span class="lb">RANKING</span>
+        <h4>月間<br>ランキング</h4>
+        <p>今月のリング／トーナメントランキング。上位入賞で豪華プライズを付与。</p>
+        <span class="go">順位を見る <span class="ar">›</span></span>
+      </a>
+    </div>
+  </div>
 </section>
 
 <!-- 不安先回り -->
