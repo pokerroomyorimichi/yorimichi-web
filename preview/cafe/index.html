@@ -21,9 +21,9 @@
   --sans:'Noto Sans JP',sans-serif;
   --en:'Cormorant',serif;
   --maxw:1180px;
-  --logo-h:46px;          /* ロゴの高さ（調整パネル対象） */
-  --fs:15px;              /* 本文サイズ */
-  --sec-pad:96px;         /* セクション上下余白 */
+  --logo-h:52px;          /* ロゴの高さ（調整パネル対象／大画面で96px） */
+  --fs:16px;              /* 本文サイズ（大画面で19px） */
+  --sec-pad:80px;         /* セクション上下余白 */
   --ease:cubic-bezier(.16,.84,.44,1);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -241,7 +241,7 @@ section{padding:var(--sec-pad) 0;position:relative;}
 
 /* ---- 大画面アップスケール（ワイドモニター対応） ---- */
 @media(min-width:1500px){
-  :root{--maxw:1340px;--fs:16px;--logo-h:60px;--sec-pad:130px;}
+  :root{--maxw:1500px;--fs:19px;--logo-h:96px;--sec-pad:80px;}
   .hd{padding:18px 40px;}
   .hd.solid{padding:12px 40px;}
   .hd .nav{gap:32px;}
@@ -273,7 +273,6 @@ section{padding:var(--sec-pad) 0;position:relative;}
   .access h3{font-size:26px;}.access .addr{font-size:15.5px;}
 }
 @media(min-width:1800px){
-  :root{--maxw:1440px;}
   .hero h1{font-size:92px;}
 }
 
@@ -297,6 +296,7 @@ section{padding:var(--sec-pad) 0;position:relative;}
   .board-grid{grid-template-columns:1fr;}
 }
 @media(max-width:680px){
+  :root{--logo-h:44px;--fs:16px;}
   .hd .nav{display:none;}.hd .burger{display:flex;}
   .fixedcta{display:block;}
   .ft{padding-bottom:120px;}
