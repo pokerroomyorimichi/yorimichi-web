@@ -1,16 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
+
 /* ============================================================
-   YORIMICHI 公式サイト  style.css
-   ブランドカラー: 墨 #3E3A39 / 朱 #E63B10 / 生成 #EFEFEF
+   YORIMICHI 公式サイト  style.css  ── カフェ（喫茶店）体系
+   生成り紙 #F3EEE5 / 墨 #3E3A39 / 朱 #E63B10 / 線 #d8cfbe
+   見出し=Noto Serif JP（明朝） 英字=Cormorant 本文=Noto Sans JP
    ============================================================ */
 
 :root {
-  --ink:    #3E3A39;   /* メインの濃いグレー（背景・文字） */
-  --ink-2:  #2b2827;   /* さらに濃い背景 */
-  --accent: #E63B10;   /* YORIMICHIの朱色（CTA・差し色） */
-  --paper:  #EFEFEF;   /* 生成りの明るい背景 */
-  --white:  #ffffff;
-  --muted:  #8d8888;   /* 補助テキスト */
-  --line:   #e3e0dd;   /* 区切り線 */
+  --ink:      #3E3A39;   /* 墨グレー（文字・濃色背景） */
+  --ink-2:    #2b2827;   /* さらに濃い墨 */
+  --ink-soft: #6b6560;   /* やわらかい墨（補助文字） */
+  --accent:   #E63B10;   /* 朱色（CTA・差し色） */
+  --paper:    #F3EEE5;   /* 生成り紙（温かみのある地色） */
+  --paper-2:  #EAE3D6;   /* 生成り紙・濃いめ */
+  --white:    #ffffff;
+  --muted:    #8d8888;   /* 補助テキスト */
+  --line:     #d8cfbe;   /* 区切り線（生成り系） */
+  --serif: 'Noto Serif JP', serif;               /* 見出し明朝 */
+  --sans:  'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+  --en:    'Cormorant', serif;                    /* 英字ラベル */
   --radius: 14px;
   --maxw:   1080px;
   --ease:   cubic-bezier(.16,.84,.44,1);
@@ -21,10 +29,10 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--sans);
   color: var(--ink);
   background: var(--paper);
-  line-height: 1.9;
+  line-height: 1.95;
   font-size: 15px;
   letter-spacing: .04em;
   -webkit-font-smoothing: antialiased;
@@ -33,6 +41,15 @@ body {
 
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
+
+/* 見出しは明朝体、英字ラベルはCormorant（カフェ体系の要） */
+h1, h2, h3, h4 { font-family: var(--serif); }
+.serif { font-family: var(--serif); }
+.section-head .en, .block-head .en, .page-hero .en,
+.info-item h3 .en {
+  font-family: var(--en); font-style: italic; font-weight: 600;
+  text-transform: none; font-size: 15px;
+}
 
 .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 
@@ -482,6 +499,9 @@ a { color: inherit; text-decoration: none; }
   .section{ padding: 54px 0; }
   .section-head{ margin-bottom: 32px; }
   .page-hero{ padding: 116px 0 42px; }
+  .page-hero h1{ font-size: 21px; letter-spacing: .02em; line-height: 1.55; overflow-wrap: anywhere; }
+  .page-hero .container{ padding: 0 20px; }
+  .page-hero .en{ font-size: 13px; letter-spacing: .12em; }
   .page-body{ padding: 46px 0 70px; }
   .page-body .container{ padding: 0 18px; }
   .block{ margin-bottom: 40px; }
