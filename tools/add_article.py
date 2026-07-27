@@ -227,8 +227,8 @@ def main():
         if not title:
             continue
         pub = col(row, '公開', 'publish', 'status')
-        if pub and not is_publish(pub):
-            skipped.append(f'行{i}: 「{title}」下書きのためスキップ')
+        if not is_publish(pub):
+            skipped.append(f'行{i}: 「{title}」未公開（公開=✅で反映）のためスキップ')
             continue
         kind_in = col(row, '種別', 'kind') or 'NEWS'
         kind = 'トーナメントイベント' if 'トーナ' in kind_in else 'NEWS'
