@@ -1,0 +1,44 @@
+name: HP更新（シート→本番反映）
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'      # 5分ごと（GitHubの都合で数分前後する場合あり）
+  workflow_dispatch:            # 手動実行（「今すぐ反映」）
+  repository_dispatch:          # 外部トリガー（将来のGASボタン用）
+    types: [hp-update]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hp-update
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    env:
+      # 社員用シート「HP更新」タブのCSVエクスポートURL（公開読取）
+      SHEET_CSV: "https://docs.google.com/spreadsheets/d/13Laq5NAwrDUbWVp-fDljj34vP_vIXQobFyr0hpLvKqQ/export?format=csv&gid=0"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: シート内容をHTMLへ反映
+        run: python3 tools/overlay_build.py --csv "$SHEET_CSV"
+
+      - name: 変更があればコミット＆公開
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name  "yorimichi-bot"
+            git config user.email "bot@users.noreply.github.com"
+            git add -A
+            git commit -m "HP更新: シート反映 ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git push
+            echo "✅ 反映しました"
+          else
+            echo "変更なし（反映済み）"
+          fi
