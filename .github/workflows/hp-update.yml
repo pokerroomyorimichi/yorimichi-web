@@ -18,8 +18,9 @@ jobs:
   apply:
     runs-on: ubuntu-latest
     env:
-      # 社員用シート「HP更新」タブのCSVエクスポートURL（公開読取）
-      SHEET_CSV: "https://docs.google.com/spreadsheets/d/13Laq5NAwrDUbWVp-fDljj34vP_vIXQobFyr0hpLvKqQ/export?format=csv&gid=0"
+      # 社員用シート（公開読取CSV）
+      SHEET_CSV:   "https://docs.google.com/spreadsheets/d/13Laq5NAwrDUbWVp-fDljj34vP_vIXQobFyr0hpLvKqQ/export?format=csv&gid=0"
+      ARTICLE_CSV: "https://docs.google.com/spreadsheets/d/13Laq5NAwrDUbWVp-fDljj34vP_vIXQobFyr0hpLvKqQ/export?format=csv&gid=2"
     steps:
       - uses: actions/checkout@v4
 
@@ -27,7 +28,10 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: シート内容をHTMLへ反映
+      - name: 新規記事を生成（記事追加タブ）
+        run: python3 tools/add_article.py --csv "$ARTICLE_CSV"
+
+      - name: 既存情報をHTMLへ反映（HP更新タブ）
         run: python3 tools/overlay_build.py --csv "$SHEET_CSV"
 
       - name: 変更があればコミット＆公開
