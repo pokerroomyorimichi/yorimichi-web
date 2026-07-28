@@ -318,6 +318,12 @@ def main():
     if not args.dry and created:
         json.dump(registry, open('data/slots.json', 'w', encoding='utf-8'),
                   ensure_ascii=False, indent=1)
+        # シートのプルダウン(IMPORTDATA)用CSVも更新 → 新記事も修正対象に自動追加
+        with open('data/slots.csv', 'w', encoding='utf-8', newline='') as f:
+            w = csv.writer(f)
+            for s in registry:
+                w.writerow([s['label'], s['slotId'],
+                            '画像' if s['type'] == 'image' else 'テキスト', s['pageLabel']])
 
     print(f'=== add_article {"(DRY)" if args.dry else ""} ===')
     print(f'新規作成: {len(created)} / スキップ: {len(skipped)} / エラー: {len(errors)}')

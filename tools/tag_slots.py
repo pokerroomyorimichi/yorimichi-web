@@ -161,7 +161,19 @@ def main():
     os.makedirs('data', exist_ok=True)
     json.dump(registry, open('data/slots.json', 'w', encoding='utf-8'),
               ensure_ascii=False, indent=1)
-    print(f'\n=== 合計 {total} slots / {len(files)} ページ → data/slots.json ===')
+    write_slots_csv(registry)
+    print(f'\n=== 合計 {total} slots / {len(files)} ページ → data/slots.json + data/slots.csv ===')
+
+
+def write_slots_csv(registry):
+    """シートのIMPORTDATA用にヘッダー無しCSV(場所ラベル, slotId, 種別, ページ)を書き出す。
+    先頭列=場所ラベル → シートのプルダウン(場所)がこれを直接参照して自動更新される。"""
+    import csv as _csv
+    with open('data/slots.csv', 'w', encoding='utf-8', newline='') as f:
+        w = _csv.writer(f)
+        for s in registry:
+            w.writerow([s['label'], s['slotId'],
+                        '画像' if s['type'] == 'image' else 'テキスト', s['pageLabel']])
 
 
 if __name__ == '__main__':
